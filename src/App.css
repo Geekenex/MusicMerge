@@ -2,4 +2,26 @@
   background-color: aquamarine;
   margin: 0;
   text-align: center;
+  padding: 20px
+}
+.description {
+  text-align: center;
+}
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  gap: 20px;
+}
+.convert-button {
+  background-color: aquamarine;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.convert-button:hover {
+  background-color: #00b3b3;
 }
