@@ -1,23 +1,23 @@
 import { useRef, useState } from 'react';
 import './App.css';
+import PlaylistOut from './PlaylistOut.js';
 
 function App() {
   const playlistURL = useRef('');
-  const [playlistInputError, setPlaylistInputError] = useState(false);
+  const [validURL, setValidURL] = useState(true);
 
   function handleURLInput(e){
     console.log(playlistURL.current.value);
 
     if (playlistURL.current.value.startsWith("https://open.spotify.com/playlist")){
       console.log("do a url request");
-      setPlaylistInputError(false);
+      setValidURL(true);
     }
     else {
       console.log("throw an error");
-      setPlaylistInputError(true);
+      setValidURL(false);
     }
   }
-
 
   return (
     <div className="App">
@@ -30,16 +30,13 @@ function App() {
           <input className='playlist-input' type='text' ref={playlistURL} placeholder='Spotify Playlist URL' />
           <button className='convert-button' onClick={handleURLInput}>Convert</button>
         </div>
-        {playlistInputError ? <p className='playlist-fail'>Please enter a valid playlist URL</p> : null}
-        
-        <div className='output-container'>
-          <p className='output'>Link to converted playlist:</p>
-        </div>
+        {validURL ? 
+          <PlaylistOut url={playlistURL.current.value} />
+        : <p className='playlist-fail'>Please enter a valid playlist URL</p> 
+        }
     </div>
     </div>
   );
 }
-
-
 
 export default App;
