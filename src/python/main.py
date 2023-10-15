@@ -5,23 +5,6 @@ import create_playlist
 
 
 
-URL = "https://api.musicapi.com/public/search"
+data = get_playlist.getplaylist("https://open.spotify.com/playlist/54FU94uOYfAepLqdbfJjkT?si=c233d48b1ee044c1")
 
-
-payload = json.dumps({
-  "track": "Bezos I",
-  "type": "track",
-  "sources": [
-    "spotify",
-    "youtube",
-  ]
-})
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': 'Token 9612173b-0afb-45ce-aa05-4dc065481d94'
-}
-
-response = requests.request("POST", URL, headers=headers, data=payload)
-
-print(response.text)
+# playlist = create_playlist.create_playlist(data)

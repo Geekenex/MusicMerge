@@ -17,12 +17,7 @@ def gettoken():
   auth_response = requests.post(auth_url, headers=auth_headers, data=auth_data)
 
   if auth_response.status_code == 200:
-      token = auth_response.json().get('access_token')
-      token_type = auth_response.json().get('token_type')
-      expires = auth_response.json().get('expires_in')
-      print("Access token:", token)
-      print("token_type:", token_type)
-      #print("expires", expires)
+    pass
   else:
       print("Failed to obtain access token: ", auth_response.status_code)
   return auth_response
@@ -46,10 +41,7 @@ def getplaylist(urlplaylist, authresponse= gettoken()):
   if response.status_code == 200:
       data = response.json()
       print(data)
+      return data
   else:
-      print("Request failed with status code:", response.status_code)
+      return None
 
-
-
-
-print(getplaylist("https://open.spotify.com/playlist/0ZrdiFRWOifoWKKK2cqkeq?si=0f5a212bbd2d46b5"))
