@@ -6,11 +6,12 @@ function App() {
   const playlistURL = useRef('');
   const [validURL, setValidURL] = useState(true);
   const [componentKey, setComponentKey] = useState(0)
+  const spotifyString = "https://open.spotify.com/playlist/";
 
   function handleURLInput(e){
     console.log(playlistURL.current.value);
 
-    if (playlistURL.current.value.startsWith("https://open.spotify.com/playlist")){
+    if (playlistURL.current.value.startsWith(spotifyString) && playlistURL.current.value != spotifyString){
       console.log("do a url request");
       setValidURL(true);
     }
