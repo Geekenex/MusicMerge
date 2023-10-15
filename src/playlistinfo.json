@@ -1,0 +1,38 @@
+{
+    "tracks": [
+        {
+            "source": "spotify",
+            "status": "success",
+            "data": {
+                "externalId": "5aszL9hl6SBzFNsOvw8u8w",
+                "previewUrl": null,
+                "name": "Bezos I",
+                "artistNames": [
+                    "Bo Burnham"
+                ],
+                "albumName": "INSIDE",
+                "imageUrl": "https://i.scdn.co/image/ab67616d0000b27388fed14b936c38007a302413",
+                "isrc": "",
+                "duration": 58149,
+                "url": "https://open.spotify.com/track/5aszL9hl6SBzFNsOvw8u8w"
+            },
+            "type": "track"
+        },
+        {
+            "source": "youtube",
+            "status": "success",
+            "data": {
+                "externalId": "gjokosjYs_0",
+                "previewUrl": null,
+                "name": "Bezos I",
+                "artistNames": null,
+                "albumName": "",
+                "imageUrl": "https://i.ytimg.com/vi/gjokosjYs_0/mqdefault.jpg",
+                "isrc": "",
+                "duration": null,
+                "url": null
+            },
+            "type": "track"
+        }
+    ]
+}

@@ -23,6 +23,8 @@ function App() {
     setComponentKey(prevKey => prevKey + 1);
   }
 
+
+
   return (
     <div className="App">
         <h2 className='header'>
