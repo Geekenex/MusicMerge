@@ -11,7 +11,7 @@ function App() {
   function handleURLInput(e){
     console.log(playlistURL.current.value);
 
-    if (playlistURL.current.value.startsWith(spotifyString) && playlistURL.current.value != spotifyString){
+    if (playlistURL.current.value.startsWith(spotifyString) && playlistURL.current.value !== spotifyString){
       console.log("do a url request");
       setValidURL(true);
     }
@@ -25,10 +25,13 @@ function App() {
 
   return (
     <div className="App">
-        <h2 className='header'>MusicMerge</h2>
+        <h2 className='header'>
+          MusicMerge
+          <span></span> {}
+        </h2>
         <div className='background'>
         <p className='description'>  
-          A tool for converting spotify playlists to!
+          A tool for converting spotify playlists to youtube playlists.
         </p>
         <div className='input-container'>
           <input className='playlist-input' type='text' ref={playlistURL} placeholder='Spotify Playlist URL' />

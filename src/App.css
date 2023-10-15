@@ -1,10 +1,58 @@
 .header {
+  position: relative; 
   background-color: #1C6E8C;
   margin: 0;
   text-align: center;
   padding: 20px;
   color: white;
+  overflow: hidden; 
 }
+
+.header::before, .header::after, .header span::before, .header span::after {
+  content: '♪ ♫ ♪';
+  position: absolute;
+  top: 50%;
+  font-size: 2em;
+  opacity: 0.5;
+  animation: moveNotes 12s linear infinite;
+  white-space: nowrap;
+}
+
+.header::before {
+  left: -20%;
+  animation-delay: 1.25s; 
+}
+
+.header::after {
+  left: -20%; 
+  animation-delay: 2.5s; 
+}
+
+.header span::before, .header span::after {
+  content: '♫ ♪ ♫';
+  font-size: 1.5em; 
+  animation: moveNotes 14s linear infinite;
+}
+
+.header span::before {
+  left: -20%;
+  animation-delay: 4.5s;
+}
+
+.header span::after {
+  left: -20%;
+  animation-delay: 6s; 
+}
+
+@keyframes moveNotes {
+  0% {
+    transform: translateY(-50%) translateX(0);
+  }
+  100% {
+    transform: translateY(-50%) translateX(120vw); 
+  }
+}
+
 .background {
   background-color: #f2f2f2;
   height: 100vh;
