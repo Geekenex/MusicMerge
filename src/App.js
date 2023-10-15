@@ -5,7 +5,7 @@ function App() {
     <div className="App">
         <h2 className='header'>MusicMerger</h2>
         <p>
-          A tool for converting spotify playlists to .
+          A tool for converting spotify playlists to!
         </p>
 
     </div>
