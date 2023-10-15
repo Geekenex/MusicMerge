@@ -1,8 +1,9 @@
 .header {
-  background-color: aquamarine;
+  background-color: #1C6E8C;
   margin: 0;
   text-align: center;
-  padding: 20px
+  padding: 20px;
+  color: white;
 }
 .background {
   background-color: #f2f2f2;
@@ -24,15 +25,16 @@
   gap: 20px;
 }
 .convert-button {
-  background-color: aquamarine;
+  background-color: #298fb4;
   border: none;
   border-radius: 5px;
   padding: 10px;
   font-size: 20px;
   cursor: pointer;
+  color: white;
 }
 .convert-button:hover {
-  background-color: #00b3b3;
+  background-color: #135a74;
   transition: 0.3s;
 }
 .playlist-input {
@@ -45,14 +47,14 @@
 }
 .playlist-input:focus {
   outline: none;
-  border: 1px solid aquamarine;
+  border: 1px solid #298fb4;
 }
 .playlist-input::placeholder {
   color: #ccc;
 }
 /*failing input message, animate in*/
 .playlist-fail {
-  color: black;
+  color: white;
   font-size: 18px;
   background-color: red;
   padding: 10px;
