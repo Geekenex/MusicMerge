@@ -5,6 +5,7 @@ import PlaylistOut from './PlaylistOut.js';
 function App() {
   const playlistURL = useRef('');
   const [validURL, setValidURL] = useState(true);
+  const [componentKey, setComponentKey] = useState(0)
 
   function handleURLInput(e){
     console.log(playlistURL.current.value);
@@ -17,6 +18,8 @@ function App() {
       console.log("throw an error");
       setValidURL(false);
     }
+
+    setComponentKey(prevKey => prevKey + 1);
   }
 
   return (
@@ -31,7 +34,7 @@ function App() {
           <button className='convert-button' onClick={handleURLInput}>Convert</button>
         </div>
         {validURL ? 
-          <PlaylistOut url={playlistURL.current.value} />
+          <PlaylistOut key={componentKey} url={playlistURL.current.value} />
         : <p className='playlist-fail'>Please enter a valid playlist URL</p> 
         }
     </div>
