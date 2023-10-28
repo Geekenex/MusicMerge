@@ -1,4 +1,5 @@
 import requests
+import json
 
 def get_tokens(client_id, client_secret, redirect_uri, auth_code):
     token_url = "https://oauth2.googleapis.com/token"
@@ -21,11 +22,13 @@ def get_tokens(client_id, client_secret, redirect_uri, auth_code):
         print(response.text)
         return None
 
-# Replace these placeholders with your values
-YOUR_CLIENT_ID = "REPLACED"
-YOUR_CLIENT_SECRET = "REPLACED"
-YOUR_REDIRECT_URI = "http://localhost:8080/callback"
-YOUR_AUTH_CODE = "4/0AfJohXmMhbWtYATqN-kWvfNiz6kzITpGY_mA64LFPfLIlRiuGD8AjH1IeV4AbTDwegxu0A"
+
+with open("google-credentials.json", 'r') as file:
+    googleCreds = json.load(file)
+YOUR_CLIENT_ID = googleCreds["CLIENT-ID"]
+YOUR_CLIENT_SECRET = googleCreds["CLIENT-SECRET"]
+YOUR_REDIRECT_URI = googleCreds["REDIRECT-URI"]
+YOUR_AUTH_CODE = googleCreds["AUTH-CODE"]
 
 tokens = get_tokens(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_REDIRECT_URI, YOUR_AUTH_CODE)
 if tokens:
