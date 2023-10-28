@@ -24,5 +24,6 @@ yarn-error.log*
 
 secrets.json
 google-credentials.json
+spotify-credentials.json
 
 src/python/__pycache__

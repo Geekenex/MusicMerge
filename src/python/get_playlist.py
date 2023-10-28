@@ -1,10 +1,15 @@
 import requests
 import base64
+import json
 
 
 def gettoken():
-  client_id = 'REPLACED'
-  client_secret = 'REPLACED'
+  
+  with open("spotify-credentials.json", 'r') as file:
+    spotifyCreds = json.load(file)
+
+  client_id = spotifyCreds["client-id"]
+  client_secret = spotifyCreds["client-secret"]
 
   auth_url = 'https://accounts.spotify.com/api/token'
   auth_headers = {
