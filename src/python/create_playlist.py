@@ -1,10 +1,12 @@
+import time
 import google.oauth2.credentials
 import googleapiclient.discovery
 import googleapiclient.errors
 import google.auth.transport.requests
 import json
 
-googleCreds = json.loads("google-credentials.json")
+with open("google-credentials.json", 'r') as file:
+    googleCreds = json.load(file)
 
 SERVICE_ACCOUNT_FILE = 'service_account.json'
 SCOPES = ['https://www.googleapis.com/auth/youtube.force-ssl']
@@ -53,6 +55,7 @@ def generate_songs(tracks, playlist_id):
     out = []
 
     for track in tracks:
+        time.sleep(1)
         song = track["track"]
         artist = song["artists"][0]["name"]
         name = song["name"]
@@ -77,7 +80,15 @@ def generate_songs(tracks, playlist_id):
             }
         )
         response = request.execute()
-
+        if response.get("error"):
+            print(response["error"]["message"])
+            out.append({
+                "image": song["album"]["images"][0]["url"],
+                "name": "Failed to add {} to playlist".format(name),
+                "artist": artist,
+                "url": "https://www.youtube.com/results?search_query=" + query
+            })
+            continue
         # add image, name, artist, and video url to out
         out.append({
             "image": song["album"]["images"][0]["url"],

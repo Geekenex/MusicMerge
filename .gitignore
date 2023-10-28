@@ -24,3 +24,5 @@ yarn-error.log*
 
 secrets.json
 google-credentials.json
+
+src/python/__pycache__

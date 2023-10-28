@@ -4,7 +4,7 @@ import base64
 
 def gettoken():
   client_id = 'REPLACED'
-  client_secret = '352869543257429094e480273bf80f18'
+  client_secret = 'REPLACED'
 
   auth_url = 'https://accounts.spotify.com/api/token'
   auth_headers = {

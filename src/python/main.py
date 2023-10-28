@@ -2,16 +2,27 @@ import requests
 import json
 import get_playlist
 import create_playlist
+from flask import Flask, jsonify, request
 
 
+app = Flask(__name__)
 
-data = get_playlist.getplaylist("https://open.spotify.com/playlist/1hW4IgEQykevDf4lkDKF1B?si=e4a315a631ff4aa8")
+@app.route('/convert-playlist', methods=['POST'])
+def Convert_Playlist():
+    data = request.get_json()
+    url = data["url"]
+    data = get_playlist.getplaylist(url)
+    name = data["name"]
+    description = "A playlist converted from Spotify to YouTube. Created by Playlist Converter."
+    playlist = create_playlist.create_playlist(name, description)
+    res = create_playlist.generate_songs(data["tracks"]["items"], playlist["id"])
+    return jsonify(res)
 
-name = data["name"]
-description = "A playlist converted from Spotify to YouTube. Created by Playlist Converter."
-playlist = create_playlist.create_playlist(name, description)
 
-res = create_playlist.generate_songs(data["tracks"]["items"], playlist["id"])
+@app.route('/', methods=['GET'])
+def index():
+    return "200 - We good, server is up."
 
-print(json.dumps(res, indent=4))
+if __name__ == '__main__':
+    app.run(debug=True)
 
