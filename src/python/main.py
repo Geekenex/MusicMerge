@@ -24,5 +24,5 @@ def index():
     return "200 - We good, server is up."
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=1234)
 
