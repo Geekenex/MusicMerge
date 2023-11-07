@@ -1,11 +1,13 @@
 import { useRef, useState } from 'react';
 import './App.css';
 import PlaylistOut from './PlaylistOut.js';
+import axios from 'axios';
 
 function App() {
   const playlistURL = useRef('');
-  const [validURL, setValidURL] = useState(true);
+  const [validURL, setValidURL] = useState(false);
   const [componentKey, setComponentKey] = useState(0)
+  const [requestCount, setRequestCount] = useState(0);
   const spotifyString = "https://open.spotify.com/playlist/";
 
   function handleURLInput(e){
@@ -13,17 +15,18 @@ function App() {
 
     if (playlistURL.current.value.startsWith(spotifyString) && playlistURL.current.value !== spotifyString){
       console.log("do a url request");
+      //call api from PlaylistOut
       setValidURL(true);
+      setRequestCount(prevCount => prevCount + 1);
     }
     else {
       console.log("throw an error");
       setValidURL(false);
+      setRequestCount(prevCount => prevCount + 1);
     }
 
     setComponentKey(prevKey => prevKey + 1);
   }
-
-
 
   return (
     <div className="App">
@@ -41,7 +44,9 @@ function App() {
         </div>
         {validURL ? 
           <PlaylistOut key={componentKey} url={playlistURL.current.value} />
-        : <p className='playlist-fail'>Please enter a valid playlist URL</p> 
+        : //only show error message if the user has tried to convert a playlist
+          requestCount > 0 ? <p className='playlist-fail'>Please enter a valid playlist URL</p> : 
+          null
         }
     </div>
     </div>

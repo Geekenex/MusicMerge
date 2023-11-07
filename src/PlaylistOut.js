@@ -1,47 +1,54 @@
 import { useEffect, useState } from "react";
 
-let playlistInfo = {};
-
 function PlaylistOut({ url }) {
-    useEffect(() => {
-        async function apiCall() {
-            // replace this with url
-            await fetch('playlistinfo.json', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                }
-            )
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (myJson) {
-                    playlistInfo = myJson;
-                    console.log(playlistInfo)
-                });
+  const [playlistInfo, setPlaylistInfo] = useState({});
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function apiCall() {
+      try {
+        const response = await fetch('http://127.0.0.1:1234/convert-playlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            url: url
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error, status: ${response.status}`);
         }
-        apiCall();
-    }, []);
-    return (
-        <div className='output-container'>
-            <p className='output'>Converted playlist: {url}</p>
-            {playlistInfo.tracks ?
-                <ul>
-                    {
-                        playlistInfo.tracks
-                            .map(track =>
-                                <li key={track.data.name}><img src={track.data.imageUrl}></img>Name: {track.data.name}</li>
-                            )
-                    }
-                </ul> : null}
 
-        </div>
-    );
+        const data = await response.json();
+        setPlaylistInfo(data); // Update the state with the fetched data
+        console.log(data);
+      } catch (error) {
+        setError("Failed to load playlist: " + error.message); // Set error message
+        console.error("ERROR", error);
+      }
+    }
+
+    apiCall();
+  }, [url]);
+
+  if(!playlistInfo) {
+    return <div className='output-container'>Loading converted playlist info...</div>;
+  }
+
+  return (
+    <div className='output-container'>
+      <p className='output'>Converted playlist: {url}</p>
+      {playlistInfo.tracks ? (
+        <ul>
+          {playlistInfo.tracks.map((track, index) => (
+            <li key={index}><img src={track.image} alt={track.name} />Name: {track.name}</li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
 }
 
-
-async function showPlaylistData() {
-
-}
 export default PlaylistOut;
