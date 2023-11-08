@@ -39,7 +39,7 @@ function PlaylistOut({ url }) {
 
   return (
     <div className='output-container'>
-      <p className='output'>Converted playlist: {url}</p>
+      <p className='output'>Converted playlist: {playlistInfo.url}</p>
       {playlistInfo.tracks ? (
         <ul>
           {playlistInfo.tracks.map((track, index) => (

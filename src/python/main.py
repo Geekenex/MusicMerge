@@ -18,7 +18,7 @@ def Convert_Playlist():
     playlist = create_playlist.create_playlist(name, description)
     res = create_playlist.generate_songs(data["tracks"]["items"], playlist["id"])
     print(playlist)
-    resres = f"{{\"url\":\"https://www.youtube.com/playlist?list={playlist['id']}\", \"tracks\": {jsonify(res)}}}"
+    resres = f"{{\"url\":\"https://www.youtube.com/playlist?list={playlist['id']}\", \"tracks\": {res}}}"
     return jsonify(resres)
 
 
@@ -27,6 +27,6 @@ def index():
     return "200 - We good, server is up."
 
 if __name__ == '__main__':
-    print(Convert_Playlist("https://open.spotify.com/playlist/0pdKwyRMaa136TUouG9il3?si=28638d39de1642c9"))
+   #print(Convert_Playlist("https://open.spotify.com/playlist/0pdKwyRMaa136TUouG9il3?si=28638d39de1642c9"))
     app.run(debug=True, port=1234)
 
