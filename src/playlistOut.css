@@ -1,0 +1,8 @@
+.trackImg{
+    width: 250px;
+}
+.trackDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

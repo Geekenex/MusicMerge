@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-
+import "./playlistOut.css"
 function PlaylistOut({ url }) {
-  const [playlistInfo, setPlaylistInfo] = useState({url, tracks: [] });
+  const [playlistInfo, setPlaylistInfo] = useState({ tracks: [] });
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -21,7 +21,13 @@ function PlaylistOut({ url }) {
           throw new Error(`HTTP error, status: ${response.status}`);
         }
 
-        const data = await response.json();
+        let data = await response.json();
+
+       /* if (typeof data === 'string') {
+          console.log(data);
+          data = JSON.parse(data.replace("'", "\""));
+        }
+        */
         setPlaylistInfo(data); // Update the state with the fetched data
         console.log(data);
       } catch (error) {
@@ -33,9 +39,15 @@ function PlaylistOut({ url }) {
     apiCall();
   }, [url]);
 
-  if(Object.keys(playlistInfo).length === 0) {
-    return <div className='output-container'>Loading converted playlist info...</div>;
-  }
+
+  useEffect(() => {
+    //print playlist info to console when updated
+    console.log(playlistInfo);
+    console.log(playlistInfo.tracks);
+    console.log(playlistInfo.url);
+    console.log(typeof playlistInfo);
+  }, [playlistInfo]);
+
   return (
     <div className='output-container'>
       {error && <p>Error: {error}</p>}
@@ -45,7 +57,15 @@ function PlaylistOut({ url }) {
           {playlistInfo.tracks.length > 0 ? (
             <ul>
               {playlistInfo.tracks.map((track, index) => (
-                <li key={index}><img src={track.image} alt={track.name} />Name: {track.name}</li>
+                <div key={index} className="trackDiv">
+                  <a href={track.url}>
+                    <img src={track.image} alt={track.name} className="trackImg"/>
+                  </a>
+                  <div className="playListInfo">
+                    <p><b>Name</b>: {track.name}</p>
+                    <p><b>Artist</b>: {track.artist}</p>
+                  </div>
+                </div>
               ))}
             </ul>
           ) : <div>No tracks found.</div>}

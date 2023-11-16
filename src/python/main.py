@@ -12,14 +12,25 @@ CORS(app)
 def Convert_Playlist():
     data = request.get_json()
     url = data["url"]
-    data = get_playlist.getplaylist(url)
-    name = data["name"]
+
+    # Get playlist data
+    playlist_data = get_playlist.getplaylist(url)
+    
+    # Create new playlist
+    name = playlist_data["name"]
     description = "A playlist converted from Spotify to YouTube. Created by Playlist Converter."
     playlist = create_playlist.create_playlist(name, description)
-    res = create_playlist.generate_songs(data["tracks"]["items"], playlist["id"])
-    print(playlist)
-    resres = f"{{\"url\":\"https://www.youtube.com/playlist?list={playlist['id']}\", \"tracks\": {res}}}"
-    return jsonify(resres)
+
+    # Generate songs for the new playlist
+    tracks = create_playlist.generate_songs(playlist_data["tracks"]["items"], playlist["id"])
+
+    # Construct response
+    response = {
+        "url": f"https://www.youtube.com/playlist?list={playlist['id']}",
+        "tracks": tracks
+    }
+
+    return jsonify(response)
 
 
 @app.route('/', methods=['GET'])
