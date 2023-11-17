@@ -30,6 +30,7 @@ function PlaylistOut({ url }) {
         */
         setPlaylistInfo(data); // Update the state with the fetched data
         console.log(data);
+        setError(null);
       } catch (error) {
         setError("Failed to load playlist: " + error.message); // Set error message
         console.error("ERROR", error);
@@ -49,25 +50,25 @@ function PlaylistOut({ url }) {
   }, [playlistInfo]);
 
   return (
-    <div className='output-container'>
+    <div>
+    <p className='output'>Converted playlist: <a href={playlistInfo.url}>{playlistInfo.url}</a></p>
       {error && <p>Error: {error}</p>}
       {playlistInfo.url ? (
         <>
-          <p className='output'>Converted playlist: {playlistInfo.url}</p>
           {playlistInfo.tracks.length > 0 ? (
-            <ul>
+            <div className="output-container">
               {playlistInfo.tracks.map((track, index) => (
                 <div key={index} className="trackDiv">
-                  <a href={track.url}>
-                    <img src={track.image} alt={track.name} className="trackImg"/>
-                  </a>
+                <a href={track.url}>
+                  <img src={track.image} alt={track.name} className="trackImg"/>
                   <div className="playListInfo">
                     <p><b>Name</b>: {track.name}</p>
                     <p><b>Artist</b>: {track.artist}</p>
-                  </div>
+                  </div>  
+                </a>
                 </div>
               ))}
-            </ul>
+            </div>
           ) : <div>No tracks found.</div>}
         </>
       ) : (
